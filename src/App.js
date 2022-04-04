@@ -28,9 +28,14 @@ function App() {
       date: new Date(2022, 1, 3),
     },
   ];
+
+  const addExpenseHandler = (expense) => {
+    console.log("App.js");
+    console.log(expense);
+  };
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses} />
     </div>
   );
