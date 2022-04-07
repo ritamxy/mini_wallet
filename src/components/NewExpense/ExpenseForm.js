@@ -33,6 +33,10 @@ const ExpenseForm = (props) => {
     // });
   };
 
+  /**
+   * This handler used to submit inputed data, by invoking callback function onSaveExpenseData
+   * @param {onSubmit} event
+   */
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -43,6 +47,7 @@ const ExpenseForm = (props) => {
     };
 
     props.onSaveExpenseData(expenseData);
+
     setEnteredTitle("");
     setEnteredAmount("");
     setEnteredDate("");
