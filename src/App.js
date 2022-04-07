@@ -33,6 +33,7 @@ function App() {
     console.log("App.js");
     console.log(expense);
   };
+
   return (
     <div>
       <NewExpense onAddExpense={addExpenseHandler} />
