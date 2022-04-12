@@ -14,7 +14,7 @@ const NewExpense = (props) => {
     setIsEditing(false);
   };
 
-  const starEditingHandler = () => {
+  const startEditingHandler = () => {
     setIsEditing(true);
   };
 
@@ -30,7 +30,7 @@ const NewExpense = (props) => {
         />
       )}
       {!isEditing && (
-        <button onClick={starEditingHandler}>Add New Expense</button>
+        <button onClick={startEditingHandler}>Add New Expense</button>
       )}
     </div>
   );
