@@ -1,36 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
-const DUMMY_EXPENSES = [
-  {
-    id: "e1",
-    title: "Toilet Paper",
-    amount: 9.95,
-    date: new Date("2022-3-31"),
-  },
-  {
-    id: "e2",
-    title: "New TV",
-    amount: 699.98,
-    date: new Date("2021-5-24"),
-  },
-  {
-    id: "e3",
-    title: "New Screen",
-    amount: 249.59,
-    date: new Date("2022-1-2"),
-  },
-  {
-    id: "e4",
-    title: "New Desk(Wooden)",
-    amount: 450,
-    date: new Date("2021-2-3"),
-  },
-];
+const App = () => {
+  const [expenses, setExpenses] = useState([]);
 
-function App() {
-  const [expenses, setExpenses] = useState(DUMMY_EXPENSES);
+  useEffect(() => {
+    const fetchExistedExpenses = async () => {
+      const response = await fetch(
+        "https://mini-wallet-23d6b-default-rtdb.firebaseio.com/current_expenses.json"
+      );
+      const responseData = await response.json();
+      const loadedExpenses = [];
+
+      for (const key in responseData) {
+        //destructing amount, date, title from responseData[key]
+        const { amount, date, title } = responseData[key];
+        loadedExpenses.push({
+          id: key,
+          title: title,
+          amount: amount,
+          // Convert date from string to Date type
+          date: new Date(date),
+        });
+      }
+
+      setExpenses(loadedExpenses);
+    };
+
+    fetchExistedExpenses();
+  }, []);
 
   const addExpenseHandler = (expense) => {
     setExpenses((prevExpenses) => {
@@ -44,6 +43,6 @@ function App() {
       <Expenses items={expenses} />
     </div>
   );
-}
+};
 
 export default App;
