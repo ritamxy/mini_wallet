@@ -24,7 +24,6 @@ const App = () => {
           date: new Date(date),
         });
       }
-
       setExpenses(loadedExpenses);
     };
 
